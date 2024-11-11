@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+        li {
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+        .exit-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #fff0f0;
+            border: 1px solid #f00;
+            color: #a00;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Contacts</h1>
+        <ul id="contacts-list"></ul>
+    </div>
+    <script>
+      
+        var contacts = ['Arnold', 'Sly', 'Dwayne', 'Vin', 'JCVD', 'Steven'];
+        var contactsList = document.getElementById('contacts-list');
+
+        // Display the contacts
+        for (var i = 0; i < contacts.length; i++) {
+            var li = document.createElement('li');
+            li.textContent = 'Slot ' + i + ': ' + contacts[i];
+            contactsList.appendChild(li);
+        }
+
+        var keepGoing = true;
+
+        while (keepGoing) {
+            // Ask user for a slot number
+            var entry = prompt('Enter Entry Number (0-5):');
+            var entryNumber = parseInt(entry);
+
+            if (!isNaN(entryNumber) && entryNumber >= 0 && entryNumber < contacts.length) {
+                // If valid, show the contact name
+                var name = contacts[entryNumber];
+                var another = prompt('Displaying ' + name + '.\nMake another selection? (y/n):');
+                if (another.toLowerCase() === 'n') {
+                    keepGoing = false;
+                }
+            } else {
+                // If invalid, show an error
+                var another = prompt('That Entry is not in the Database.\nMake another selection? (y/n):');
+                if (another.toLowerCase() === 'n') {
+                    keepGoing = false;
+                }
+            }
+        }
+
+        // Goodbye message
+        document.body.innerHTML = '<div class="exit-message"><h1>Goodbye!</h1><p>Thanks for using the Contacts App!</p></div>';
+    </script>
+</body>
+</html>
